@@ -9,7 +9,7 @@ import clusto
 import json
 
 
-def get(name, driver=None):
+def get(name, driver=None, method='get_by_name'):
     """
 Tries to fetch a clusto object from a given name, optionally validating
 the driver given. Returns:
@@ -28,9 +28,9 @@ the driver given. Returns:
     else:
         try:
             if driver:
-                obj = clusto.get_by_name(name, assert_driver=clusto.driverlist[driver])
+                obj = clusto[method](name, assert_driver=clusto.driverlist[driver])
             else:
-                obj = clusto.get_by_name(name)
+                obj = clusto[method](name)
 
         except LookupError as le:
             status = 404
